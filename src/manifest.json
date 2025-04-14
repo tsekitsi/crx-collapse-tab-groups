@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Collapse Tab Groups",
+  "version": "1.0",
+  "description": "Automatically collapse all tab groups except the active tab's group.",
+  "permissions": [
+    "tabs",
+    "tabGroups",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  }
+}

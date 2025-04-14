@@ -1,0 +1,13 @@
+{
+  "name": "crx-collapse-tab-groups",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "^4.40.0",
+    "rollup-plugin-chrome-extension": "^3.6.12"
+  }
+}
