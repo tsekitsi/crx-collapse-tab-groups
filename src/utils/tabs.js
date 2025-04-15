@@ -39,7 +39,9 @@ export async function openPreviousGroupsLatestTab() {
         { active: true },
       );
     }
-  } catch (_err) { }
+  } catch {
+    // Ignore errors. This function is just a nice-to-have.
+  }
 }
 
 async function customGroupUpdate(tbdGroupId, options) {
@@ -49,13 +51,13 @@ async function customGroupUpdate(tbdGroupId, options) {
       chrome.tabGroups.update(tbdGroupId, options)
         .then(resolve)
         .catch(() => {
-          console.log('~~ attempt', attempt);
+          // console.log('attempt', attempt);
           if (attempt < maxRetries) {
             setTimeout(() => {
               tryUpdate(++attempt);
             }, 20);
           }
-        })
+        });
     };
     tryUpdate();
   });
