@@ -30,7 +30,7 @@ async function removeStorage(keys) {
  * @param {number} groupId - The ID of the group for which to get latest active tab.
  * @returns {Promise<number>} The ID of the latest active tab in group.
  */
-export async function getLatestTab(groupId) {
+export async function getLatestTabId(groupId) {
   const result = await getStorage([groupId.toString()]);
   return result[groupId.toString()];
 }
@@ -41,7 +41,7 @@ export async function getLatestTab(groupId) {
  * @param {number} tabId - The ID of the latest active tab in the group.
  * @returns {Promise<void>}
  */
-export async function setLatestTab(groupId, tabId) {
+export async function setLatestTabId(groupId, tabId) {
   setStorage({ [groupId]: tabId });
 }
 

@@ -1,4 +1,4 @@
-import { getLatestTab, getPreviousGroupId } from './storage.js';
+import { getLatestTabId, getPreviousGroupId } from './storage.js';
 
 /**
  * Collapses all groups except the one passed.
@@ -31,16 +31,18 @@ async function getGroupIds() {
  * @returns {Promise<void>}
  */
 export async function openPreviousGroupsLatestTab() {
-  try {
-    const previousGroupId = await getPreviousGroupId();
-    if (previousGroupId) {
-      chrome.tabs.update(
-        await getLatestTab(previousGroupId),
-        { active: true },
-      );
+  const previousGroupId = await getPreviousGroupId();
+  if (previousGroupId) {
+    const previousGroupsLatestTabId = await getLatestTabId(previousGroupId);
+    try {
+      await chrome.tabs.get(previousGroupsLatestTabId);
+    } catch {
+      return; // If tab no longer exists, do nothing.
     }
-  } catch {
-    // Ignore errors. This function is just a nice-to-have.
+    chrome.tabs.update(
+      await getLatestTabId(previousGroupId),
+      { active: true },
+    );
   }
 }
 
